@@ -2,7 +2,6 @@ import os
 import json
 import traceback
 import pandas as pd 
-from dotenv import load_dotenv
 from src.mcqgenerator.logger import logging
 from src.mcqgenerator.utils import read_file,get_table_data
 
@@ -13,8 +12,9 @@ from langchain.chains import LLMChain
 from langchain.chains import SequentialChain
 
 #loading environment variable
+from dotenv import load_dotenv
 load_dotenv()
-key=os.getenv("API")
+key=os.getenv("API_OPENAI")
 llm=ChatOpenAI(openai_api_key=key,model_name="gpt-3.5-turbo",temperature=0.5)
 
 TEMPLATE="""

@@ -32,7 +32,7 @@ with st.form("user_inputs"):
                 text=read_file(uploaded_file)
                 # count no of token
                 with get_openai_callback() as cb:
-                    logging.info("hi i am goin start my execution")
+                    logging.info("creating response")
                     response=generate_evaluate_chain(
                         {
                             "text":text,
@@ -42,7 +42,6 @@ with st.form("user_inputs"):
                             "response_json":json.dumps(RESPONSE_JSON)
                         }
                     )
-                    st.write(response)
                     logging.info("created resonse")
             except Exception as e:
                 traceback.print_exception(type(e),e,e.__traceback__)
@@ -52,7 +51,7 @@ with st.form("user_inputs"):
                 print(f"Prompt Tokens:{cb.prompt_tokens}")
                 print(f"Completion Tokens:{cb.completion_tokens}")
                 print(f"Total Cost:{cb.total_cost}")
-                
+                logging.info("Total cost{cb.total_cost}")
                 if isinstance(response,dict):
                     quiz=response.get("quiz",None)
                     if quiz is not None:
